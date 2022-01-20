@@ -1,4 +1,3 @@
 express
-dotenv
 mysql
 body-parser

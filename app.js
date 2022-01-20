@@ -225,5 +225,4 @@ app.get("/",(req,res)=>{
 // which is the file required at the top. Basically
 //just js extends file
 
-
-app.listen(port,()=> console.log(`Listening to port ${port}`))
+app.listen(process.env.PORT || port, () => console.log(`Example app listening at http://localhost:${port}`));

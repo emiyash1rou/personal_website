@@ -1,0 +1,211 @@
+<%- include('base') -%>
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Adding Character</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="add" method="POST">
+              <div class="form-group">
+                <label for="charusername">Character Name</label>
+                <input type="text" class="form-control" id="charusername" name="charusername" required>
+              </div>
+              <div class="form-group">
+                  <label for="chardesc">Character Description</label>
+                  <input type="textarea" class="form-control" id="chardesc" name="chardesc" required>
+              </div>
+              <div class="row">
+                  <div class="col">
+                      <label for="charclass">Character Class</label>
+                      <input type="text" class="form-control" id="charclass" placeholder="Enter first name" name="charclass" required>
+                  </div>
+                  <div class="col">
+                      <label for="charstatus">Character Status</label>
+                      <input type="text" class="form-control" id="charstatus"  placeholder="Enter lastname" name="charstatus" required>
+                  </div>
+                  
+                
+              </div>
+                            <div class="form-group" style="padding-top: 5%;">
+                                <button type="submit" onclick="location.reload();"  class="btn btn-primary w-100">Add Character</button>
+              </div>
+            </div>
+              
+
+                
+              
+          </form>
+        </div>
+  
+      </div>
+    </div>
+    <div class="modal fade" id="modal_update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Adding Character</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="update" method="POST">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <input class="input-group-text" type="text"id="inputGroup-sizing-sm" name="char_id">
+                    </div>
+                    <input type="text" class="form-control" id="charusername" name="charusername" required placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                  
+           
+                  <div class="form-group">
+                      <label for="chardesc">Character Description</label>
+                      <input type="textarea" class="form-control" id="chardesc" name="chardesc" required>
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                          <label for="charclass">Character Class</label>
+                          <input type="text" class="form-control" id="charclass" placeholder="Enter first name" name="charclass" required>
+                      </div>
+                      <div class="col">
+                          <label for="charstatus">Character Status</label>
+                          <input type="text" class="form-control" id="charstatus"  placeholder="Enter lastname" name="charstatus" required>
+                      </div>
+                      
+                    
+                  </div>
+                                <div class="form-group" style="padding-top: 5%;">
+                                    <button type="submit"  class="btn btn-primary w-100">Update</button>
+                  </div>
+                </div>
+                  
+    
+                    
+                  
+              </form>
+            </div>
+      
+          </div>
+        </div>
+  </div>
+
+<div class="card" style="width:100%;">
+    <div class="card-body">
+        <% if(locals.operation!=null && locals.operation=="add"){ %>
+            <div class="alert alert-success" role="alert">
+            Character added. Please wait for an admin to approve it.
+              </div>
+              <% } else if(operation=="edit"){ %>
+  <div class="alert alert-danger" role="alert">
+              Edited.
+              </div>
+<%    } %>
+      <h1 class="card-title">Hello, <%= locals.user_data.username.name|| "World" %></h5>
+      <h6 class="card-subtitle mb-2 text-muted">This is your dashboard</h6>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+      <div class="card-group">
+        <div class="card border-primary mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Add A Character</h5>
+            <p class="card-text">You can add characters you would like to post.</p>
+            <a href="" class="card-link" data-toggle="modal" data-target="#exampleModalLong">Add A Character</a>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+
+        <div class="card border-primary mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Settings</h5>
+            <p class="card-text">Edit your user profile.</p>
+            <a href="/profile/<%= user_data.userid.id %>" class="card-link">Edit Profile</a>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+      </div>
+      <begin>
+
+            <% if(data!=null){ %>
+                <h3 style="text-align: center;">Your Character List</h1>
+            <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Character</th>
+                        <th scope="col">Character Details</th>
+                        <th scope="col">Publish Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <% for (let i = 0; i < data.length; i++) { 
+                            if (data[i].approved=="yes"){
+                            %>
+                            <tr class="table-primary">
+                            <%  } else{ %> 
+                                <tr class="table-warning">
+                                    <% } %>
+                                <th scope="row"><%= i+1 %></th>
+                                <td><%= data[i].charusername %></td>
+                                <td ><%= data[i].chardesc %></td>
+                              
+                                 <% if(data[i].approved =="pending"){
+                                     %>
+                                
+                                <td><a class="btn btn-secondary pull-left" disabled style="color: white; ">Pending</a>
+                                    <a class="btn btn-info pull-left" style="color: white; " data-toggle="modal" onclick="updateData(<%= JSON.stringify(data[i]) %>)" data-target="#modal_update">Update</a>
+                                    <a class="btn btn-danger pull-left" style="color: white;" href="/delete/<%= data[i].id %>" >Delete</a>
+                              </tr>
+                              <%  } else { %>
+                                <td><a class="btn btn-secondary pull-left" disabled style="color: white; ">Approved</a>
+                                <%  } %>
+                      <%  } } else{ %>
+                        <h3 style="text-align: center;">You currently do not have any record.</h1>
+            <% } %>
+                      
+                    </tbody>
+                  </table>
+</begin>
+    
+  </div>
+  <script type="text/javascript">
+  if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+    
+     
+  
+    $("#modal_update").on("submit",(e)=>{
+        // alert("pumasok")
+
+        e.preventDefault();
+        $.ajax({
+            type:"POST",
+            url:"/update",
+            dataType:"json",
+            data:$('form#update').serializeArray(),
+            success:()=>{
+                location.reload(true);
+            }
+        });
+    });
+
+    const updateData=(data)=>
+    {
+    
+        // alert("Hello"+data.id)
+        $(`input[name=charusername]`).val(data.charusername);
+        $(`input[name=chardesc]`).val(data.chardesc);
+        $(`input[name=charclass]`).val(data.charclass);
+        $(`input[name=charstatus]`).val(data.charstatus);
+        $(`input[name=char_id]`).val(data.id);
+        
+        
+    }
+
+
+    </script>

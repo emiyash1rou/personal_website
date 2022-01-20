@@ -1,0 +1,65 @@
+<%- include('base') -%>
+<!-- <script>
+     $(function() {
+        $(`input[name=username]`).val(user_data.username.name);
+        $(`input[name=password]`).val(user_data.password);
+        $(`input[name=fname]`).val(user_data.fname);
+        $(`input[name=lname]`).val(user_data.lname);
+        $(`input[name=contactno]`).val(user_data.contactno);
+        $(`input[name=emailadd]`).val(user_data.email);
+        $(`input[name=id]`).val(user_data.id);
+});
+</script> -->
+<form style=" background-color: #eee; padding:5%; border-radius:5px;" method="POST">
+
+    <div style="width: 100%;justify-content: center; align-items: center; text-align: center;"><h1>Your Profile </h1></div>
+    <div class="form-group">
+    <label for="username">Username</label> 
+    <% console.log(user_data.username.name) %>
+    <input type="text" class="form-control" id="username" aria-describedby="emailHelp" value="<%= user_data.username.name %>" name="username" required>
+</div>
+<div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" aria-describedby="emailHelp" placeholder="Enter password" name="password" required>
+</div>
+<div class="row">
+    <div class="col">
+        <label for="fname">Firstname</label>
+        <input type="text" class="form-control" id="fname" aria-describedby="emailHelp" placeholder="Enter first name" name="fname" required>
+    </div>
+    <div class="col">
+        <label for="lname">Lastname</label>
+        <input type="text" class="form-control" id="lname" aria-describedby="emailHelp" placeholder="Enter lastname" name="lname" required>
+    </div>
+</div>
+<!-- Allows user to create account (username, password, first name,
+last name, contact number, email) -->
+
+<div class="form-group">
+  <label for="Contact number">Contact Number</label>
+  <input type="number" class="form-control" id="Contact number" placeholder="Enter contact number" name="contactno" required>
+</div>
+<div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
+</div>
+<button type="submit" class="btn btn-primary w-100">Update</button>
+  </form>
+  <script>
+    $("form").on("submit",(e)=>{
+        e.preventDefault();
+        console.log($('form').serializeArray())
+        $.ajax({
+            type: "POST",
+            url: "/update",
+            dataType: "json",
+            data: $('form').serializeArray(),
+            success:()=>{
+                location.reload(true);
+            }
+        });
+    });
+   
+    
+    
+</script>

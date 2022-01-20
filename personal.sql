@@ -1,0 +1,20 @@
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `fname` varchar(100) NOT NULL,
+  `lname` varchar(100) NOT NULL,
+  `contactno` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `character` (
+  `id` int(11) NOT NULL,
+  `charusername` varchar(100) NOT NULL,
+  `chardesc` varchar(100) NOT NULL,
+  `charclass` varchar(100) NOT NULL,
+  `charstatus` varchar(100) NOT NULL,
+  `approved` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

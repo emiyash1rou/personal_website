@@ -1,3 +1,3 @@
-express
-mysql
+express==4.17.2
+mysql==2.18.1
 body-parser==1.19.1

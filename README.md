@@ -23,4 +23,9 @@ npm install express dotenv mysql ejs cookie-parser express-session nodemon
 - views/home.ejs
 ```
 
+#### FOR DEPLOYMENT
+- npm install -g heroku
+- heroku login
+- heroky create
+
 
